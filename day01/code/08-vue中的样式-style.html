@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 对象就是无序键值对的集合 -->
+        <h1 :style="[objStyle1, objStyle2]">这是H1标签</h1>
+    </div>
+
+    <script>
+    var vm = new Vue({
+        el: "#app",
+        data:{
+            objStyle1:{ 'color': 'red', 'font-weight': 200 },
+            objStyle2:{ 'font-style': 'italic'}
+        },
+        methods: {
+            
+        },
+
+    })
+    </script>
+</body>
+</html>
