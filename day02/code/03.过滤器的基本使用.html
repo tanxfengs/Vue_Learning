@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{ msg | msgFormat }}</p>
+    </div>
+
+    <script>
+        // 定义一个Vue 全局的过滤器, 名字叫做 msgFormat
+        Vue.filter('msgFormat', function(msg) {
+
+            // 第一个参数除了可以写字符串外, 还可以写正则
+            return msg.replace(/format/g, "replacing") //只会替换掉第一个,且原目标不变,需要重新赋值给一个变量}
+            //如果你想把所有的都替换掉，要使用正则	例: "bob".replace(/b/g, 'l') === 'lol'
+        })
+
+        var vm =  new Vue({
+            el: "#app",
+            data: {
+                msg: "ITS TESING format CODE format format"
+            },
+            methods: {
+                
+            },
+        })
+    </script>
+</body>
+</html>
