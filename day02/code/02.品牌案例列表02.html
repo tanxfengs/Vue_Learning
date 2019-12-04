@@ -95,11 +95,12 @@
                 // 注意: 在每个函数中, 第一个参数, 永远是el, 表示被绑定了指令的那个元素, 这个el参数, 是原生的js对象
                 // 在元素刚绑定了指令的时候, 还没有插入到DOM中取, 这时候调用focus方法没有作用
                 // 因为, 一个元素, 只有插入DOM之后, 才能重新获取焦点
-
+                // el.focus()
             },
             inserted: function(el){
                 //el:指令绑定的元素
                el.focus()
+               // 和Js行为相关的操作, 最好在inserted中执行, 防止Js行为不生效
                 
             },
             updated: function() {
@@ -107,6 +108,16 @@
             },
         }
         )
+
+        Vue.directive('color', {
+            bind: function(el) {
+                el.style.color = 'red'
+                // 和样式相关的操作, 一般都可以在bind中执行
+            },
+            inserted: function(el){
+                
+            }
+        })
 
         var vm = new Vue({
             el: "#app",
@@ -149,7 +160,8 @@
                     // 这个方法是返回一个索引, 同样也需要条件去判断
                     var index = this.list.findIndex((item)=>{
                     
-                    if(item.id === id) return true;
+                    if(item.id === id) 
+                        return true;
                     })
 
                     this.list.splice(index, 1)
