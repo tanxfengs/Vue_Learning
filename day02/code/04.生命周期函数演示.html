@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="lib/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h3 id="h3">{{ msg }}</h3>
+        <input type="button" value="修改msg" @click="msg='no'">
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg: "Testing Code"
+            },
+            methods: {
+                show(){
+                    // console.log("执行了show方法")
+                }
+            },
+            beforeCreate() {
+                // console.log(this.msg)
+                // this.show()
+            },
+            created() {
+                // console.log(this.msg)
+                // this.show()
+            },
+            beforeMount() { // 模板在内存中已经编译完成, 尚未在浏览器中渲染
+                // console.log(document.getElementById("h3").innerText)
+                
+            },
+
+            mounted() { // 已经挂在到浏览器中
+                // console.log(document.getElementById("h3").innerText)
+            },
+            // 接下来是运行中的两个事件
+            beforeUpdate() { //表示界面还没更新, 数据已经更新了
+                // console.log("界面上元素的内容: "+document.getElementById("h3").innerText)
+                // console.log("data 中的 msg 数据是 "+ this.msg);
+                // 页面中的数据还是旧的, data中的数据已经是最信了
+                // 页面尚未和最信的数据保持同步
+            },
+            updated() {
+                console.log("界面上元素的内容: "+document.getElementById("h3").innerText)
+                console.log("data 中的 msg 数据是 "+ this.msg);
+            },
+        })
+    </script>
+    
+</body>
+</html>

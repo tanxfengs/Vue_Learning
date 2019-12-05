@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="lib/vue.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .ball {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="快到碗里来" @click="flag=!flag">
+        <!-- 1. 使用trasition 把小球包裹起来 -->
+        <transition
+            @before-enter="beforeEnter"
+            @enter="enter"
+            @after-enter="afterEnter"
+        >
+        
+       <div class="ball" v-if="flag"></div>
+    </transition>
+
+    </div>
+
+    <script>
+    var vm = new Vue({
+        el: "#app",
+        data:{
+            flag:false
+        },
+        methods: {
+            // 动画钩子函数的第一个参数. el: 表示要执行动画的那个DOM元素, 是个原生的JS DOM对象
+            beforeEnter(el){
+                el.style.transform = "translate(0, 0)"
+            },
+            enter(el, done){
+                // 动画开始之后
+                el.offsetWidth
+                el.style.transform = "translate(150px, 450px)"
+                el.style.transition = "all 1s ease "
+                // 这里的done是afterEnter函数
+                
+                done()
+            },
+            afterEnter(el){
+                // 动画完成之后
+                this.flag = !this.flag
+
+            }
+        },
+    })
+    </script>
+</body>
+</html>

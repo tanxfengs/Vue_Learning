@@ -30,7 +30,7 @@
                     <input type="button" value="添加" class="btn btn-primary" @click="add">
                     
                     <label>搜索的关键字: 
-                            <input type="text" class="form-contorl" v-model="keywords" v-focus>
+                            <input type="text" class="form-contorl" v-model="keywords" v-focus v-color="'green'">
                     </label>
               </div>
         </div>
@@ -48,7 +48,7 @@
                 <!-- 需要把符合条件的数据放到新数组中 -->
                 <tr v-for="item in search(keywords)" :key="item.id">
                     <td>{{ item.id }}</td>
-                    <td v-text="item.name"></td>
+                    <td v-text="item.name" v-color></td>
                     <td>{{ item.ctime | dateFormat('') }}</td>
                     <td>
                         <a href="" @click.prevent="del(item.id)">删除</a>
@@ -108,11 +108,16 @@
             },
         }
         )
-
+        
         Vue.directive('color', {
-            bind: function(el) {
-                el.style.color = 'red'
+            bind: function(el, binding) {
+                // el.style.color = 'red'
                 // 和样式相关的操作, 一般都可以在bind中执行
+                // binding.name 函数名称
+                // binding.value 函数值
+                // binding.expression 表达式(变量)
+                el.style.color = binding.value
+            
             },
             inserted: function(el){
                 

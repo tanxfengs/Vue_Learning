@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="lib/vue.js"></script>
+    <link rel="stylesheet" href="lib/animate.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 需求: 点击按钮, 让h3显示, 再点击, 让h3隐藏 -->
+        <!-- <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">
+                <h3 v-if="flag">这是一个H3</h3>        
+        </transition>
+        <input type="button" value="toggle" @click="flag=!flag"> -->
+
+        <transition enter-active-class="bounceIn" leave-active-class="bounceOut" :duration="{enter:200, leave: 400}">
+                <h3 v-if="flag" class="animated">这是一个H3</h3>        
+        </transition>
+        <input type="button" value="toggle" @click="flag=!flag">
+
+    </div>
+
+    <script>
+    var vm = new Vue({
+        el: "#app",
+        data:{
+            flag:false
+        },
+        methods: {
+            
+        },
+    })
+    </script>
+</body>
+</html>
