@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="lib/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="获取元素" @click="getElement">
+        <h3 ref="myh3">今天天气不错</h3>
+
+        <login ref="login"></login>
+    </div>
+
+    <template id="tmp">
+        <div>
+            <h1 v-text="msg">Hello World</h1>
+        </div>
+    </template>
+
+    <script>
+
+
+
+        var vm = new Vue({
+            el: "#app",
+            data:{},
+            methods:{
+                getElement() {
+                    // console.log( document.getElementById("xxx"))
+                    //ref 是 reference 的英文缩写
+                    console.log(this.$refs.myh3.innerText)
+
+                    // 注册组件属性 可以调用子组件方法
+                    this.$refs.login.show()
+
+                }
+            },
+            components: {
+                login:{
+                template: "#tmp",
+                data() {
+                    return {
+                        msg: "son msg"
+                    }
+                },
+                methods: {
+                    show() {
+                        // alert(12345)
+                        console.log(12345)
+                    }
+                }
+            }
+        }
+        })    
+    </script>
+</body>
+</html>

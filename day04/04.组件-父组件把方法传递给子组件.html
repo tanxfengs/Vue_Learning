@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="lib/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+            <com1 @func="show"></com1>
+    </div>
+
+    <template id="tmp1">
+        <div>
+            <h1>我是子组件</h1>
+            <input type="button" value="子组件按钮----触发父组件func方法" @click="myclick">
+        </div>
+    </template>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                msg: "父组件中的数据"
+            },
+            methods: {
+                show(data){
+                    console.log("调用了父组件身上的show方法" + data)
+                }
+            },
+            components: {
+                // 结论: 经过演示, 发现子组件中默认无法访问到父组件中的data上的数据和
+                com1: {
+                    template: "#tmp1",
+                                       // props中的数据 都是通过父组件中传递给子组件的
+
+                                       props: [], //把父组件传递过来的pernetmsg属性, 先在props中定义一下
+                    methods: {
+                        myclick(){
+                            // emit 原意触发调用, 发射的意思
+                            this.$emit("func", 234)
+                        }
+                    },
+                    },
+
+                }
+            
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="lib/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <mycom3></mycom3>
+    </div>
+
+    <template id="tmp1">
+        <div>
+            <h1>这是通过外部template模板创建的</h1>
+            <h4>好用</h4>
+        </div>
+    </template>
+
+    <div id="app2">
+         <login></login>
+    </div>
+
+    <template id="tmp2">
+        <div>
+            <h1>这是私有的组件</h1>
+        </div>
+    </template>
+
+    <script>
+
+        // 无论是哪种方式创建的组件, 组件的template属性指向的模板, 根元素只有有一个
+        Vue.component("mycom3", {
+            template: "#tmp1"
+        })
+
+        var vm = new Vue({
+            el: "#app",
+            data:{},
+            methods: {
+                
+            },
+
+        })
+
+
+        var vm2 = new Vue({
+            el: "#app2",
+            data:{},
+            methods: {
+                
+            },
+            filters:{},
+            directives:{},
+            components: { //定义实例内部组件
+                login: {
+                    // template: "<h1>这是私有的组件</h1>"
+                    template: "#tmp2"
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>

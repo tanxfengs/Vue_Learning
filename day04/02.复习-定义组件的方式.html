@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="lib/vue.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(150px);
+        }
+
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.5s ease;
+        }
+    </style>
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <a href="" @click.prevent="comName='login'">登录</a>
+        <a href="" @click.prevent="comName='register'">注册</a>
+        <!-- Vue 提供了 compenent 来展示对应名称的组件 -->
+        <!-- component 是一个占位符, is属性 可以用来指定要展示的组件的名称 -->
+
+        <!-- mode 设置 组件切换的模式 -->
+        <transition mode="out-in">
+        
+       <component :is="comName"></component>
+    </transition>
+
+    </div>
+   
+
+    <script>
+        // 组件名称是字符串
+        Vue.component("register", {
+            template: "<h3>注册组件</h3>"
+        })
+
+        Vue.component("login", {
+            template: "<h3>登录组件</h3>"
+        })
+
+        var vm = new Vue({
+            el: "#app",
+            data:{
+               comName: 'login' // component 中is 绑定的组件
+            },
+        })
+
+    </script>
+</body>
+</html>

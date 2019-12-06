@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue.js"></script>
+    <script src="lib/vue-router.js"></script>
+    <style>
+        .router-link-active, .my-class{
+            font-weight: 4;
+            background-color: red;
+        }
+
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(100px);
+        }
+
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.5s ease;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+    <div id="app">
+        <!-- <a href="#/login">登录</a>
+        <a href="#/register">注册</a> -->
+            <!-- router-link 会自动渲染成a标签 -->
+            <router-link to="/login">登录</router-link>
+            <router-link to="/register">注册</router-link>
+
+        <!-- 这是vue-router 提供的元素 专门用来当做占位符, 路由匹配到的会展示到router-view中 -->
+        <!-- 可以看做是一个占位符 -->
+        <transition mode="out-in">
+        
+        <router-view></router-view>
+        </transition>
+
+    </div>
+
+    <script>
+        // c创建一个路由对象 , 当导入vue-router之后, 在window全局对象中, 就有了一个路由的构造函数, 叫做VueRouter
+        var login = {
+            template: "<h1>登录名称</h1>"
+        }
+
+        var register = {
+            template: "<h1>注册名称</h1>"
+        }
+
+        var routerObj = new VueRouter({
+            // route 这个配置对象中的route表示 [路由匹配规则的意思]
+            routes: [
+            // path 表示监听哪个路由链接地址
+            // component 表示如果匹配到前面的path, 则展示对应component
+            // redirect重定向 redirect与node 中是两码事
+            {path: "/", redirect: "/login"},
+            {path: "/login", component: login},
+            {path: "/register", component: register}
+
+        ],
+        linkActiveClass:"my-class"
+        })
+
+        var vm = new Vue({
+            el: "#app",
+            data:{},
+            methods: {
+                
+            },
+            router: routerObj // 将路由规则对象, 注册到vm实例上
+        })
+    </script>
+</body>
+</html>

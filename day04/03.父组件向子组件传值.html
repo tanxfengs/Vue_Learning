@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="lib/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 我们可以在引用子组件的时候通过属性绑定的形式(v-bind :) 
+            把需要传递给子组件的数据,
+        -->
+    <com1 :parentmsg="msg"></com1>  
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                msg: "父组件中的数据"
+            },
+            methods: {
+                
+            },
+            components: {
+                // 结论: 经过演示, 发现子组件中默认无法访问到父组件中的data上的数据和
+                com1: {
+                    template: "<h1>这是子组件{{ parentmsg }}---{{ title }}</h1>",
+                    data() {
+                        return {
+                            title: "title"
+                        }
+                    },
+                    // props中的数据 都是通过父组件中传递给子组件的
+
+                    props: ['parentmsg'] //把父组件传递过来的pernetmsg属性, 先在props中定义一下
+                }
+            }
+        })
+    </script>
+</body>
+</html>
