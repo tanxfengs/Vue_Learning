@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="lib/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1 v-text="msg"></h1>
+        <!-- 记得在这绑定父值 -->
+        <login :text="msg"></login>
+        
+    </div>
+    
+    <template id="tmp">
+        <div>
+            <h2 v-text="sonMsg"></h2>
+            <h3 :text="msg">{{ text }}</h3>
+        </div>
+    </template>
+
+    <script>
+
+    var login = {
+        template: "#tmp",
+        data() {
+            return {
+                sonMsg:"我是子消息"
+            }
+        },props:["text"]
+    }
+
+    var vm = new Vue({
+        el: "#app",
+        data:{
+            msg: "我是父消息"
+        },
+         methods: {
+             
+         },
+         components:{
+             login: login
+         }
+    })
+    </script>
+</body>
+</html>
