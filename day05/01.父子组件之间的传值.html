@@ -7,18 +7,34 @@
     <script src="lib/vue.js"></script>
     <title>Document</title>
 </head>
+
+<!-- 定义从父拿值 -->
+<!-- 
+    父: data xxx => 子: props: ["son"] 这里的son需要在组件中传递 比如com组件 <com :son="xxx"></com> 这里是把子组件data中的son与父组件的xxx属性绑定
+  
+    父 methods parentMethod() =>  子: t同样需要在com中绑定 => <com @sonMethod="parentMethod"></com>
+        调用的时候, 比如子组件中定义了一个show方法
+            show() {
+                this.$emit('sonMethod') 这里就是调用了父方法
+            }
+
+ -->
+
 <body>
     <div id="app">
         <h1 v-text="msg"></h1>
         <!-- 记得在这绑定父值 -->
-        <login :text="msg"></login>
+        <login :text="msg" @func="getMsgFronSon"></login>
+
         
     </div>
     
     <template id="tmp">
         <div>
             <h2 v-text="sonMsg"></h2>
-            <h3 :text="msg">{{ text }}</h3>
+            <h3>{{ text }}</h3>
+            <input type="button" value="向父组件传值" @click="sendMsg">
+
         </div>
     </template>
 
@@ -30,16 +46,25 @@
             return {
                 sonMsg:"我是子消息"
             }
-        },props:["text"]
+        },props:["text"],
+
+         methods: {
+            sendMsg(){
+                this.$emit("func", this.sonMsg)
+            }     
+         },
     }
 
     var vm = new Vue({
         el: "#app",
         data:{
-            msg: "我是父消息"
+            msg: "我是父消息",
+            msgFromSon: ""
         },
          methods: {
-             
+            getMsgFronSon(data) {
+                console.log(data)
+            }
          },
          components:{
              login: login

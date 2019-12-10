@@ -1,3 +1,5 @@
 {
-    "editor.fontSize": 20
+    "editor.fontSize": 20,
+    "vetur.format.options.tabSize": 4,
+    "python.pythonPath": "C:\\Users\\lavoz\\Anaconda3\\python.exe"
 }
